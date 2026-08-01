@@ -22,6 +22,10 @@ npm run server
 
 完整架构图见 [`docs/PROJECT_OVERVIEW.md`](docs/PROJECT_OVERVIEW.md)。
 
+![数字人工作台主视觉](./public/generated/workbench-hero.png)
+
+仓库内的项目展示图使用生成的虚构成人物与原创工作流场景，仅用于演示界面，不代表真实人物或真实客户素材。
+
 - 生成中心：数字人形象、音色与旁白、脚本内容、视觉包装，生成结果会回填到素材库。
 - 素材导入：头像、声音样本、Markdown/TXT 脚本。
 - 项目流程：素材检查 → MiniMax 克隆配音 → 15 秒 HeyGen 预览 → 审批确认 → 1080P 成片 → 成片库。
@@ -44,6 +48,7 @@ npm run server
 - 许可证范围和商业使用示例见 `LICENSE_SCOPE.md`；商标与修改版品牌边界见 `TRADEMARKS.md`。
 - `rachel-skill/`：保留原始项目的 `MIT` 许可证，见 `rachel-skill/LICENSE`；它不受本仓库非商业许可证替换。
 - `public/demo-avatar.svg`：原创抽象演示插画，不对应真实人物；生产项目必须自行确认人物、声音和素材授权。
+- `public/generated/`：工作台主视觉、数字人肖像和脚本/音频工作流场景图，仅用于本地演示；使用真实人物或声音前必须取得相应授权。
 - 依赖包的许可证由各自上游维护，发布时不应把 `node_modules/` 或构建产物提交进仓库。
 - 软件许可证不替代 MiniMax、HeyGen、模型、素材、隐私和平台条款；生成内容的权利边界需要按对应提供商和素材授权另行确认。
 

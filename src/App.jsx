@@ -37,6 +37,12 @@ import SpotlightCard from './components/SpotlightCard.jsx'
 import { getProviderReadiness, persistModelConfig, readModelConfig } from './model-config.js'
 import { getStageState, getWorkflowAction, hasRequiredAssets } from './workflow.js'
 
+const media = {
+  hero: '/generated/workbench-hero.png',
+  portrait: '/generated/digital-human-portrait.png',
+  studio: '/generated/studio-workflow.png',
+}
+
 const navItems = [
   { label: '项目中心', icon: LayoutDashboard },
   { label: '素材管理', icon: FolderOpen },
@@ -226,7 +232,7 @@ function AssetCard({ asset, onOpen }) {
         </div>
         <StatusLabel tone={asset.status === '未开始' ? 'neutral' : 'success'}>{asset.status}</StatusLabel>
       </div>
-      {asset.kind === 'image' && <img className="asset-portrait" src="/demo-avatar.svg" alt="演示数字人肖像" />}
+      {asset.kind === 'image' && <img className="asset-portrait" src={media.portrait} alt="数字人肖像" />}
       {asset.kind === 'audio' && (
         <div className="audio-preview">
           <button className="icon-button icon-button-dark" aria-label="播放音频"><Play size={17} fill="currentColor" /></button>
@@ -241,13 +247,13 @@ function AssetCard({ asset, onOpen }) {
       )}
       {asset.kind === 'preview' && (
         <div className="video-preview">
-          <img src="/demo-avatar.svg" alt="15秒预览封面" />
+          <img src={media.hero} alt="15秒预览封面" />
           <button className="video-play" aria-label="播放预览"><Play size={22} fill="currentColor" /></button>
           <div className="video-time"><span>00:00</span><span>00:15</span></div>
         </div>
       )}
       {asset.kind === 'visual' && (
-        <div className="visual-preview"><div className="visual-preview-swatch" /><div><strong>Clean Studio</strong><span>浅色背景 · 蓝色强调 · 现代字幕</span></div><Palette size={22} /></div>
+        <div className="visual-preview"><img className="visual-preview-image" src={media.studio} alt="视觉包装工作流" /><div><strong>Clean Studio</strong><span>浅色背景 · 蓝色强调 · 现代字幕</span></div><Palette size={22} /></div>
       )}
       {asset.kind === 'empty' && (
         <div className="empty-video"><Clapperboard size={35} strokeWidth={1.5} /><span>审批后生成最终视频</span></div>
@@ -349,13 +355,13 @@ function ModuleWorkspace({ module, assets, activity, approved, modelConfig, onSa
     if (module === '素材管理') return (
       <>
         <div className="module-toolbar"><div><span className="eyebrow">Asset library</span><h3>项目素材</h3><p>所有已导入和生成的素材都集中在这里。</p></div><button className="primary-button" onClick={() => onImport('portrait')}><UploadCloud size={15} />导入素材</button></div>
-        <div className="module-asset-list">{assets.map((asset) => <div className="module-asset-row" key={asset.key}><div className="module-asset-thumb">{asset.kind === 'image' ? <img src="/demo-avatar.svg" alt="数字人肖像" /> : asset.kind === 'preview' ? <img src="/demo-avatar.svg" alt="视频预览" /> : <asset.icon size={20} />}</div><div className="module-asset-copy"><strong>{asset.title}</strong><span>{asset.label} · {asset.meta[0]}</span></div><StatusLabel tone={asset.status === '未开始' ? 'neutral' : 'success'}>{asset.status}</StatusLabel><button className="icon-button" onClick={() => onToast(`${asset.title}已选中，可在项目中继续编辑。`)} aria-label={`选择${asset.title}`}><ArrowRight size={15} /></button></div>)}</div>
+        <div className="module-asset-list">{assets.map((asset) => <div className="module-asset-row" key={asset.key}><div className="module-asset-thumb">{asset.kind === 'image' ? <img src={media.portrait} alt="数字人肖像" /> : asset.kind === 'preview' ? <img src={media.hero} alt="视频预览" /> : <asset.icon size={20} />}</div><div className="module-asset-copy"><strong>{asset.title}</strong><span>{asset.label} · {asset.meta[0]}</span></div><StatusLabel tone={asset.status === '未开始' ? 'neutral' : 'success'}>{asset.status}</StatusLabel><button className="icon-button" onClick={() => onToast(`${asset.title}已选中，可在项目中继续编辑。`)} aria-label={`选择${asset.title}`}><ArrowRight size={15} /></button></div>)}</div>
       </>
     )
     if (module === '数字人管理') return (
       <>
         <div className="module-toolbar"><div><span className="eyebrow">Avatar library</span><h3>数字人管理</h3><p>管理可复用的人物形象和口播构图。</p></div><button className="primary-button" onClick={() => onOpenGeneration('avatar')}><Plus size={15} />新建数字人</button></div>
-        <div className="module-profile-card"><img src="/demo-avatar.svg" alt="演示数字人" /><div><StatusLabel>已通过</StatusLabel><h4>知性女声 · 商务版</h4><p>1080P · 正面半身构图 · 当前项目使用中</p><div className="module-actions"><button className="outline-button" onClick={() => onToast('数字人预览已准备。')}><Play size={14} />预览</button><button className="outline-button" onClick={() => onOpenGeneration('avatar')}>生成新版本</button></div></div></div>
+        <div className="module-profile-card"><img src={media.portrait} alt="数字人肖像" /><div><StatusLabel>已通过</StatusLabel><h4>知性女声 · 商务版</h4><p>1080P · 正面半身构图 · 当前项目使用中</p><div className="module-actions"><button className="outline-button" onClick={() => onToast('数字人预览已准备。')}><Play size={14} />预览</button><button className="outline-button" onClick={() => onOpenGeneration('avatar')}>生成新版本</button></div></div></div>
       </>
     )
     if (module === '语音管理') return (
@@ -379,13 +385,13 @@ function ModuleWorkspace({ module, assets, activity, approved, modelConfig, onSa
     if (module === '审批中心') return (
       <>
         <div className="module-toolbar"><div><span className="eyebrow">Approval desk</span><h3>审批中心</h3><p>确认预览内容后，才能解锁最终视频生成。</p></div><StatusLabel tone={approved ? 'success' : 'warning'}>{approved ? '已通过' : '待审批'}</StatusLabel></div>
-        <div className="approval-workspace"><div className="approval-workspace-preview"><img src="/demo-avatar.svg" alt="15秒预览封面" /><button className="video-play" onClick={() => onToast('正在播放 15 秒预览。')} aria-label="播放预览"><Play size={22} fill="currentColor" /></button><div className="video-time"><span>00:00</span><span>00:15</span></div></div><div className="module-checks"><strong><ShieldCheck size={16} />审批检查清单</strong><label><input type="checkbox" defaultChecked />人物口型与声音同步</label><label><input type="checkbox" defaultChecked />脚本内容准确完整</label><label><input type="checkbox" defaultChecked />画面构图适合发布</label><button className="primary-button full-width" onClick={onApprove} disabled={approved}><Check size={15} />{approved ? '已通过预览' : '通过预览并解锁成片'}</button></div></div>
+        <div className="approval-workspace"><div className="approval-workspace-preview"><img src={media.hero} alt="15秒预览封面" /><button className="video-play" onClick={() => onToast('正在播放 15 秒预览。')} aria-label="播放预览"><Play size={22} fill="currentColor" /></button><div className="video-time"><span>00:00</span><span>00:15</span></div></div><div className="module-checks"><strong><ShieldCheck size={16} />审批检查清单</strong><label><input type="checkbox" defaultChecked />人物口型与声音同步</label><label><input type="checkbox" defaultChecked />脚本内容准确完整</label><label><input type="checkbox" defaultChecked />画面构图适合发布</label><button className="primary-button full-width" onClick={onApprove} disabled={approved}><Check size={15} />{approved ? '已通过预览' : '通过预览并解锁成片'}</button></div></div>
       </>
     )
     if (module === '成片库') return (
       <>
         <div className="module-toolbar"><div><span className="eyebrow">Output library</span><h3>成片库</h3><p>集中查看预览结果与最终导出文件。</p></div><button className="outline-button" onClick={() => onToast('当前暂无可导出的最终文件。')}><FolderOpen size={15} />打开文件夹</button></div>
-        <div className="module-output-grid"><div className="module-output-card"><div className="video-preview"><img src="/demo-avatar.svg" alt="15秒预览" /><button className="video-play" onClick={() => onToast('正在播放 15 秒预览。')} aria-label="播放15秒预览"><Play size={22} fill="currentColor" /></button></div><strong>15 秒预览</strong><span>720P · 待审批</span></div><div className="module-output-card is-empty"><div className="empty-video"><Clapperboard size={34} strokeWidth={1.5} /><span>通过审批后生成最终视频</span></div><strong>最终成片</strong><span>1080P · 尚未生成</span></div></div>
+        <div className="module-output-grid"><div className="module-output-card"><div className="video-preview"><img src={media.hero} alt="15秒预览" /><button className="video-play" onClick={() => onToast('正在播放 15 秒预览。')} aria-label="播放15秒预览"><Play size={22} fill="currentColor" /></button></div><strong>15 秒预览</strong><span>720P · 待审批</span></div><div className="module-output-card is-empty"><div className="empty-video"><Clapperboard size={34} strokeWidth={1.5} /><span>通过审批后生成最终视频</span></div><strong>最终成片</strong><span>1080P · 尚未生成</span></div></div>
       </>
     )
     if (module === '数据看板') return (
@@ -408,17 +414,17 @@ function QuickPanel({ type, onClose, onOpenModule, onToast }) {
 }
 
 function AssetDetailDialog({ asset, onClose, onOpenGeneration, onToast }) {
-  return <div className="workspace-overlay" role="dialog" aria-modal="true" aria-label={`${asset.title}详情`}><section className="asset-detail-dialog"><header className="module-heading"><div><span className="eyebrow eyebrow-accent">Asset detail</span><h2>{asset.title}</h2></div><button className="icon-button" onClick={onClose} aria-label="关闭详情"><X size={19} /></button></header><div className="asset-detail-preview">{asset.kind === 'image' || asset.kind === 'preview' ? <img src="/demo-avatar.svg" alt={asset.title} /> : asset.kind === 'audio' ? <><button className="icon-button icon-button-dark" onClick={() => onToast('正在播放素材试听。')}><Play size={18} fill="currentColor" /></button><AudioWave /></> : asset.kind === 'script' ? <p>大家好，欢迎了解我们的产品。<br />我们致力于为客户提供高效、稳定、智能的解决方案。</p> : <div className="empty-video"><Clapperboard size={34} /><span>审批后生成最终视频</span></div>}</div><div className="asset-detail-meta">{asset.meta.map((item) => <span key={item}>{item}</span>)}</div><div className="module-actions"><button className="outline-button" onClick={onClose}>返回项目</button>{asset.key === 'portrait' && <button className="primary-button" onClick={() => onOpenGeneration('avatar')}>生成新版本 <ArrowRight size={14} /></button>}{asset.key === 'sourceVoice' && <button className="primary-button" onClick={() => onOpenGeneration('voice')}>生成试听 <ArrowRight size={14} /></button>}{asset.key === 'script' && <button className="primary-button" onClick={() => onOpenGeneration('script')}>生成新初稿 <ArrowRight size={14} /></button>}</div></section></div>
+  return <div className="workspace-overlay" role="dialog" aria-modal="true" aria-label={`${asset.title}详情`}><section className="asset-detail-dialog"><header className="module-heading"><div><span className="eyebrow eyebrow-accent">Asset detail</span><h2>{asset.title}</h2></div><button className="icon-button" onClick={onClose} aria-label="关闭详情"><X size={19} /></button></header><div className="asset-detail-preview">{asset.kind === 'image' || asset.kind === 'preview' ? <img src={asset.kind === 'preview' ? media.hero : media.portrait} alt={asset.title} /> : asset.kind === 'audio' ? <><button className="icon-button icon-button-dark" onClick={() => onToast('正在播放素材试听。')}><Play size={18} fill="currentColor" /></button><AudioWave /></> : asset.kind === 'script' ? <p>大家好，欢迎了解我们的产品。<br />我们致力于为客户提供高效、稳定、智能的解决方案。</p> : <div className="empty-video"><Clapperboard size={34} /><span>审批后生成最终视频</span></div>}</div><div className="asset-detail-meta">{asset.meta.map((item) => <span key={item}>{item}</span>)}</div><div className="module-actions"><button className="outline-button" onClick={onClose}>返回项目</button>{asset.key === 'portrait' && <button className="primary-button" onClick={() => onOpenGeneration('avatar')}>生成新版本 <ArrowRight size={14} /></button>}{asset.key === 'sourceVoice' && <button className="primary-button" onClick={() => onOpenGeneration('voice')}>生成试听 <ArrowRight size={14} /></button>}{asset.key === 'script' && <button className="primary-button" onClick={() => onOpenGeneration('script')}>生成新初稿 <ArrowRight size={14} /></button>}</div></section></div>
 }
 
 function NewProjectDialog({ onClose, onCreate }) {
-  const [name, setName] = useState('新数字人视频项目')
-  return <div className="workspace-overlay" role="dialog" aria-modal="true" aria-label="新建项目"><section className="new-project-dialog"><header className="module-heading"><div><span className="eyebrow eyebrow-accent">New project</span><h2>新建项目</h2></div><button className="icon-button" onClick={onClose} aria-label="关闭新建项目"><X size={19} /></button></header><p>创建一个本地项目，随后可以导入素材或从生成中心开始。</p><label className="module-field-label" htmlFor="new-project-name">项目名称</label><input id="new-project-name" value={name} onChange={(event) => setName(event.target.value)} autoFocus /><div className="module-actions"><button className="outline-button" onClick={onClose}>取消</button><button className="primary-button" onClick={() => onCreate(name.trim() || '新数字人视频项目')}><Plus size={15} />创建项目</button></div></section></div>
+  const [name, setName] = useState('数字人工作台')
+  return <div className="workspace-overlay" role="dialog" aria-modal="true" aria-label="新建项目"><section className="new-project-dialog"><header className="module-heading"><div><span className="eyebrow eyebrow-accent">New project</span><h2>新建项目</h2></div><button className="icon-button" onClick={onClose} aria-label="关闭新建项目"><X size={19} /></button></header><p>创建一个本地项目，随后可以导入素材或从生成中心开始。</p><label className="module-field-label" htmlFor="new-project-name">项目名称</label><input id="new-project-name" value={name} onChange={(event) => setName(event.target.value)} autoFocus /><div className="module-actions"><button className="outline-button" onClick={onClose}>取消</button><button className="primary-button" onClick={() => onCreate(name.trim() || '数字人工作台')}><Plus size={15} />创建项目</button></div></section></div>
 }
 
 export function App() {
   const [activeNav, setActiveNav] = useState('项目中心')
-  const [projectName, setProjectName] = useState('数字人视频项目')
+  const [projectName, setProjectName] = useState('数字人工作台')
   const [currentStage, setCurrentStage] = useState('assets')
   const [generationOpen, setGenerationOpen] = useState(false)
   const [generationMode, setGenerationMode] = useState('avatar')
@@ -687,7 +693,7 @@ export function App() {
       <aside className="sidebar">
         <div className="brand-lockup">
           <div className="brand-mark"><Clapperboard size={16} /></div>
-          <div><strong>数字人工作台</strong><span>AI VIDEO STUDIO</span></div>
+          <div><strong>数字人工作台</strong><span>DIGITAL HUMAN WORKBENCH</span></div>
         </div>
         <button className="new-project-button" onClick={() => setNewProjectOpen(true)}><Plus size={16} />新建项目</button>
         <nav className="main-nav" aria-label="主导航">
@@ -721,7 +727,7 @@ export function App() {
           </div>
           <div className="project-hero-preview">
             <div className="hero-preview-top"><span>15 秒预览</span><span>00:15 / 00:15</span></div>
-            <div className="hero-preview-media"><img src="/demo-avatar.svg" alt="数字人项目预览" /><div className="hero-preview-shade" /><button className="hero-play" aria-label="播放项目预览"><Play size={18} fill="currentColor" /></button></div>
+            <div className="hero-preview-media"><img src={media.hero} alt="数字人项目预览" /><div className="hero-preview-shade" /><button className="hero-play" aria-label="播放项目预览"><Play size={18} fill="currentColor" /></button></div>
             <div className="hero-progress"><span /></div>
           </div>
         </section>
@@ -741,9 +747,9 @@ export function App() {
 
           <aside className="queue-panel">
             <div className="queue-heading"><div><span className="eyebrow">制作队列</span><h2>当前项目</h2></div><span className="queue-count">1 / 5</span></div>
-            <div className="queue-card is-active"><div className="queue-thumb"><img src="/demo-avatar.svg" alt="项目预览" /></div><div><strong>{projectName}</strong><span>预计时长 00:15</span></div><StatusLabel tone="warning">待审批</StatusLabel></div>
+            <div className="queue-card is-active"><div className="queue-thumb"><img src={media.portrait} alt="项目预览" /></div><div><strong>{projectName}</strong><span>预计时长 00:15</span></div><StatusLabel tone="warning">待审批</StatusLabel></div>
             <button className="queue-add" onClick={() => showToast('可以从生成中心创建新的项目素材。')}><Plus size={15} />添加到队列</button>
-            <div className="preview-gate"><div className="queue-heading"><div><span className="eyebrow eyebrow-accent">Preview Gate</span><h2>预览闸门 <small>15秒</small></h2></div><Clock3 size={17} /></div><div className="gate-video"><img src="/demo-avatar.svg" alt="数字人预览画面" /><button className="video-play" aria-label="播放预览"><Play size={22} fill="currentColor" /></button><div className="video-time"><span>00:00</span><span>00:15</span></div></div><div className="gate-checklist"><strong><AlertCircle size={15} />确认以下内容</strong><label><input type="checkbox" defaultChecked />口型自然，无明显错位</label><label><input type="checkbox" defaultChecked />语音流畅，无杂音或断句异常</label><label><input type="checkbox" defaultChecked />内容准确，信息无误</label></div><button className="primary-button full-width" onClick={runWorkflowAction} disabled={workflowAction.disabled}>{workflowAction.key === 'final-busy' ? <><RefreshCw size={16} className="spin" />成片生成中…</> : workflowAction.key === 'done' ? <><Check size={16} />查看最终成片</> : <><ArrowRight size={16} />{workflowAction.label}</>}</button></div>
+            <div className="preview-gate"><div className="queue-heading"><div><span className="eyebrow eyebrow-accent">Preview Gate</span><h2>预览闸门 <small>15秒</small></h2></div><Clock3 size={17} /></div><div className="gate-video"><img src={media.hero} alt="数字人预览画面" /><button className="video-play" aria-label="播放预览"><Play size={22} fill="currentColor" /></button><div className="video-time"><span>00:00</span><span>00:15</span></div></div><div className="gate-checklist"><strong><AlertCircle size={15} />确认以下内容</strong><label><input type="checkbox" defaultChecked />口型自然，无明显错位</label><label><input type="checkbox" defaultChecked />语音流畅，无杂音或断句异常</label><label><input type="checkbox" defaultChecked />内容准确，信息无误</label></div><button className="primary-button full-width" onClick={runWorkflowAction} disabled={workflowAction.disabled}>{workflowAction.key === 'final-busy' ? <><RefreshCw size={16} className="spin" />成片生成中…</> : workflowAction.key === 'done' ? <><Check size={16} />查看最终成片</> : <><ArrowRight size={16} />{workflowAction.label}</>}</button></div>
           </aside>
         </div>
 
