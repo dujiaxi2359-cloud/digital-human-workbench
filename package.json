@@ -8,7 +8,8 @@
     "dev": "vite --host 127.0.0.1",
     "server": "node server/index.mjs",
     "build": "vite build",
-    "preview": "vite preview --host 127.0.0.1"
+    "preview": "vite preview --host 127.0.0.1",
+    "check:release": "node scripts/check_release.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.1.1",

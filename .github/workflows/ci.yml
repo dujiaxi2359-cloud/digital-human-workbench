@@ -40,5 +40,8 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Check public release boundary
+        run: npm run check:release
+
       - name: Audit dependencies
         run: npm audit --audit-level=high

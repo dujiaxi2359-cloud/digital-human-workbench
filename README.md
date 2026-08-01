@@ -41,6 +41,7 @@ npm run server
 ## 许可证与第三方边界
 
 - 工作台新增代码：`PolyForm Noncommercial License 1.0.0`，禁止商业用途，但允许非商业使用、修改和分发，具体以 `LICENSE` 为准。
+- 许可证范围和商业使用示例见 `LICENSE_SCOPE.md`；商标与修改版品牌边界见 `TRADEMARKS.md`。
 - `rachel-skill/`：保留原始项目的 `MIT` 许可证，见 `rachel-skill/LICENSE`；它不受本仓库非商业许可证替换。
 - `public/demo-avatar.svg`：原创抽象演示插画，不对应真实人物；生产项目必须自行确认人物、声音和素材授权。
 - 依赖包的许可证由各自上游维护，发布时不应把 `node_modules/` 或构建产物提交进仓库。
@@ -52,4 +53,5 @@ npm run server
 2. 保留 `LICENSE`、`NOTICE.md`、`rachel-skill/LICENSE` 和 `SECURITY.md`。
 3. 使用 `.env.example`，不要上传 `.env`。
 4. 运行 `npm run build`、`node --check server/index.mjs` 和 `python3 -m py_compile mcp/digital_human_server.py`。
-5. 对外宣传使用“公开源码/非商业项目”，不要写“OSI 开源许可证”。
+5. 运行 `npm run check:release`，确认没有密钥、运行时状态或未授权演示素材。
+6. 对外宣传使用“公开源码/非商业项目”，不要写“OSI 开源许可证”。
