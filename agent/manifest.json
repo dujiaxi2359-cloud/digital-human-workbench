@@ -1,0 +1,35 @@
+{
+  "name": "digital-human-workbench-agent",
+  "displayName": "数字人工作台 Agent",
+  "skills": [
+    {
+      "name": "rachel-digital-human-production",
+      "path": "rachel-skill/SKILL.md",
+      "invocation": "$rachel-digital-human-production",
+      "allowImplicitInvocation": false
+    }
+  ],
+  "mcpServers": [
+    {
+      "name": "digital-human-workbench",
+      "config": ".mcp.json",
+      "mode": "local-dry-run",
+      "tools": [
+        "digital_human_get_status",
+        "digital_human_preflight_assets",
+        "digital_human_configure_models",
+        "digital_human_prepare_stage",
+        "digital_human_approve_preview",
+        "digital_human_get_inbox",
+        "digital_human_handoff",
+        "digital_human_sync_workflow"
+      ]
+    }
+  ],
+  "policy": {
+    "requirePreviewApproval": true,
+    "requireAuthorizedAssets": true,
+    "neverStoreApiKeys": true,
+    "neverStartPaidGenerationImplicitly": true
+  }
+}

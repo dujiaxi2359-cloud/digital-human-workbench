@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">数字人工作台架构</title>
+  <desc id="desc">前端工作台、Agent、MCP 和安全后端适配层的关系图。</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7f8fa"/><stop offset="1" stop-color="#e7ebf0"/></linearGradient><filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#111827" flood-opacity=".12"/></filter></defs>
+  <rect width="1600" height="900" rx="32" fill="url(#bg)"/>
+  <text x="90" y="92" fill="#1d2025" font-family="Arial, sans-serif" font-size="34" font-weight="700">一套工作流，多种 Agent 客户端</text>
+  <text x="90" y="132" fill="#697382" font-family="Arial, sans-serif" font-size="17">统一 MCP 入口、统一状态文件、统一付费和审批门禁</text>
+  <g filter="url(#shadow)">
+    <rect x="90" y="205" width="420" height="500" rx="24" fill="#fff"/>
+    <rect x="590" y="205" width="420" height="500" rx="24" fill="#1e2228"/>
+    <rect x="1090" y="205" width="420" height="500" rx="24" fill="#fff"/>
+  </g>
+  <g font-family="Arial, sans-serif">
+    <text x="130" y="260" fill="#697382" font-size="13" letter-spacing="2">01 · PRODUCT SURFACE</text>
+    <text x="130" y="307" fill="#1d2025" font-size="26" font-weight="700">数字人工作台</text>
+    <text x="130" y="352" fill="#697382" font-size="16">素材管理 / 生成中心</text><text x="130" y="387" fill="#697382" font-size="16">流程状态 / 审批中心</text><text x="130" y="422" fill="#697382" font-size="16">Agent 配置 / 模型配置</text>
+    <rect x="130" y="484" width="340" height="120" rx="16" fill="#f0f5fb"/><text x="154" y="520" fill="#2879e7" font-size="14" font-weight="700">LOCAL STATE</text><text x="154" y="553" fill="#1d2025" font-size="17">job-state.json</text><text x="154" y="582" fill="#697382" font-size="14">inbox.json · config.json</text>
+    <text x="630" y="260" fill="#91a0b1" font-size="13" letter-spacing="2">02 · AGENT RUNTIME</text><text x="630" y="307" fill="#fff" font-size="26" font-weight="700">Skill + MCP</text><text x="630" y="352" fill="#c5ccd5" font-size="16">Rachel Skill 显式调用</text><text x="630" y="387" fill="#c5ccd5" font-size="16">8 个工具 · 2 个资源</text><text x="630" y="422" fill="#c5ccd5" font-size="16">Codex / Claude / Hermes / WorkBuddy</text>
+    <rect x="630" y="484" width="340" height="120" rx="16" fill="#303740"/><text x="654" y="520" fill="#82b4ff" font-size="14" font-weight="700">STDIO MCP</text><text x="654" y="553" fill="#fff" font-size="17">digital-human-workbench</text><text x="654" y="582" fill="#aeb7c4" font-size="14">handoff · status · workflow sync</text>
+    <text x="1130" y="260" fill="#697382" font-size="13" letter-spacing="2">03 · SAFE ADAPTERS</text><text x="1130" y="307" fill="#1d2025" font-size="26" font-weight="700">Provider Gateway</text><text x="1130" y="352" fill="#697382" font-size="16">MiniMax · 克隆与 T2A</text><text x="1130" y="387" fill="#697382" font-size="16">HeyGen · 资产与视频</text><text x="1130" y="422" fill="#697382" font-size="16">环境变量读取密钥</text>
+    <rect x="1130" y="484" width="340" height="120" rx="16" fill="#fff5e8"/><text x="1154" y="520" fill="#b86b12" font-size="14" font-weight="700">SAFETY GATES</text><text x="1154" y="553" fill="#1d2025" font-size="17">dry-run · confirmPaid</text><text x="1154" y="582" fill="#697382" font-size="14">preview approval required</text>
+  </g>
+  <g stroke="#7d8997" stroke-width="3" fill="none" stroke-linecap="round"><path d="M510 455h80"/><path d="M1010 455h80"/></g><g fill="#7d8997"><path d="m574 444 18 11-18 11Z"/><path d="m1074 444 18 11-18 11Z"/></g>
+  <text x="90" y="805" fill="#697382" font-family="Arial, sans-serif" font-size="16">外部模型调用始终经过显式确认；不开启付费开关时，Agent 只能执行本地 dry-run。</text>
+</svg>

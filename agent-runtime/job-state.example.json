@@ -1,0 +1,12 @@
+{
+  "project": "数字人视频项目",
+  "skill": "rachel-digital-human-production",
+  "workflow": {
+    "assets": "passed",
+    "narration": "completed",
+    "preview": "completed",
+    "approved": false,
+    "final": "not_started"
+  },
+  "last_action": null
+}

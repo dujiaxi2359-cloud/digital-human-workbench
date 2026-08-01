@@ -1,0 +1,15 @@
+{
+  "runtime_mode": "local-dry-run",
+  "skill_registered": true,
+  "mcp_registered": true,
+  "minimax": {
+    "model": "speech-2.8-hd",
+    "key_env": "MINIMAX_API_KEY",
+    "configured": false
+  },
+  "heygen": {
+    "model": "avatar_iv",
+    "key_env": "HEYGEN_API_KEY",
+    "configured": false
+  }
+}

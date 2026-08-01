@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "digital-human-workbench": {
+      "command": "python3",
+      "args": ["mcp/digital_human_server.py"]
+    }
+  }
+}

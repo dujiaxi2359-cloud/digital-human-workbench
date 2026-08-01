@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720" role="img" aria-labelledby="title desc">
+  <title id="title">数字人工作台演示头像</title>
+  <desc id="desc">用于界面预览的抽象人物插画，不对应真实人物。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e9e4da" />
+      <stop offset="1" stop-color="#c9c2b8" />
+    </linearGradient>
+  </defs>
+  <rect width="720" height="720" rx="36" fill="url(#bg)" />
+  <circle cx="360" cy="270" r="142" fill="#f3c7a9" />
+  <path d="M220 278c8-139 65-203 143-203 91 0 144 75 142 205-42-42-74-65-139-65-54 0-99 22-146 63Z" fill="#25262a" />
+  <circle cx="306" cy="278" r="12" fill="#25262a" />
+  <circle cx="414" cy="278" r="12" fill="#25262a" />
+  <path d="M325 344c23 18 47 18 70 0" fill="none" stroke="#9b5e54" stroke-width="10" stroke-linecap="round" />
+  <path d="M178 720c10-147 73-222 182-222s172 75 182 222" fill="#f7f3ec" />
+  <path d="M306 496h108l-54 116Z" fill="#d7e1e8" />
+</svg>

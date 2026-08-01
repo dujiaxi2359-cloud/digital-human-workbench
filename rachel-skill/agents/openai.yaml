@@ -1,0 +1,7 @@
+interface:
+  display_name: "Rachel Digital Human Production"
+  short_description: "MiniMax + HeyGen 数字人制作流程与质检"
+  default_prompt: "Use $rachel-digital-human-production to create a 15-second preview first, then wait for approval before generating the full digital-human video."
+
+policy:
+  allow_implicit_invocation: false

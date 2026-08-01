@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.npm-cache/
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+agent-runtime/*.json
+!agent-runtime/*.example.json
+public/demo-avatar.png
